@@ -1,22 +1,29 @@
 #include <string>
 #include <vector>
-#include <algorithm>
+#include <unordered_map>
+
 using namespace std;
 
 bool solution(vector<string> phone_book)
 {
-    bool answer = true;
+    unordered_map<string, int> um;
 
-    sort(phone_book.begin(), phone_book.end()); // sort
-
-    for (int i = 0; i < phone_book.size() - 1; i++) // 0 ~ phone_book.size() - 1
+    for (int i = 0; i < phone_book.size(); i++)
     {
-        size_t idx = phone_book[i + 1].find(phone_book[i]); // phone_book[i]를 찾기
-        if (idx != string::npos && idx == 0)                // 찾았고 찾은 index가 0이라면
+        um[phone_book[i]] = 1;
+    }
+
+    for (int i = 0; i < phone_book.size(); i++)
+    {
+        string phone_number = "";
+        for (int j = 0; j < phone_book[i].size(); j++)
         {
-            answer = false;
-            break;
+            phone_number += phone_book[i][j];
+            if (um[phone_number] && phone_number != phone_book[i])
+            {
+                return false;
+            }
         }
     }
-    return answer;
+    return true;
 }
