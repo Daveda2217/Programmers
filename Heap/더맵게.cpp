@@ -36,3 +36,9 @@ int solution(vector<int> scoville, int K)
     }
 
     return answer;
+}
+
+/*
+pq(v.begin(), v.end())
+이런식으로 한번에 priority_queue를 생성할 수 있다!
+*/
